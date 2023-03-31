@@ -40,7 +40,7 @@
   //Función que valida la contraseña ingresada
   function validarPassword(password) {  
     var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/;
-    return regex.test(password);
+    return regex.test(password.value);
   }
 </script>
 {% endblock %}
