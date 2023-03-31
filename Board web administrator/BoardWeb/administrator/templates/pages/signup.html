@@ -1,0 +1,46 @@
+{% extends "_Layout.html" %}
+{% block title %} Registrarse {% endblock %}
+{% load static %}
+{% block contenido %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/styleRegister.css' %}"/>
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+<div class="container">
+  <div class="card">
+    <h1>Registro de usuario</h1>
+    <form method="post">
+      {% csrf_token %}
+      <label for="username">Nombre de usuario:</label>
+      <input type="text" name="username" id="username" required>
+
+      <label for="password1">Contraseña:</label>
+      <input type="password" name="password1" id="password1" required>
+
+      <label for="password2">Confirmar contraseña:</label>
+      <input type="password" name="password2" id="password2" required>
+
+      <input type="submit" value="Registrarse">
+    </form>
+  </div>
+</div>
+<script>
+  //Selecciona el formulario en el documento
+  var form = document.querySelector('form');  
+  //Selecciona el campo de contraseña en el formulario
+  var password1Input = document.querySelector('#password1');  
+
+  form.addEventListener('submit', function(event) {
+    //Manda a llamar la funcion para validar la contraseña
+    if (!validarPassword(password1)) { 
+      alert('La contraseña debe tener al menos 8 caracteres, contener al menos una mayúscula, una minúscula, un número y un carácter especial.');
+      event.preventDefault(); 
+    }
+  });
+  //Función que valida la contraseña ingresada
+  function validarPassword(password) {  
+    var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/;
+    return regex.test(password);
+  }
+</script>
+{% endblock %}

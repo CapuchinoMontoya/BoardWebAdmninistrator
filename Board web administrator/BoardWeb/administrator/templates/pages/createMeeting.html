@@ -1,0 +1,81 @@
+{% extends "_Layout.html" %}
+{% block title %} Agendar Reunion {% endblock %}
+{% load static %}
+{% block contenido %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}"/>
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+{% if success %}
+<div class="alert alert-success">{{ success }}</div>
+{% endif %}
+<div class="container">
+  <div class="card mx-auto">
+    <h1>Agenda Reunion</h1>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        <div class="rooms-container">
+          {% for room in rooms %}
+          <div class="room-item">
+            <input class="room-select" type="checkbox" id="{{room.nameRoom}}"
+              value="{{room.nameRoom}}" name="{{room.nameRoom}}" />
+            <label for="{{room.nameRoom}}" class="room">{{room.nameRoom}}</label>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="form-group">
+          <label for="id_startDate">Fecha y hora de inicio de reservacion:</label>
+          <input type="datetime-local" class="form-control" id="id_startDate"
+            name="startDate" required>
+        </div>
+        <div class="form-group">
+          <label for="id_endDate">Fecha y hora final de reservacion:</label>
+          <input type="datetime-local" class="form-control" id="id_endDate"
+            name="endDate" required>
+        </div>
+        <hr>
+        <center><button type="submit" class="btn btn-success">Reservar</button></center>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+//Obtener todas las casillas de selección de salas de juntas
+var checkboxes = document.querySelectorAll('.room-select');
+//Agregar un listener de clic a cada casilla de selección
+checkboxes.forEach(function(checkbox) {
+  checkbox.addEventListener('click', function() {
+    //Si se marca una casilla, deshabilitar todas las demás
+    if (this.checked) {
+      checkboxes.forEach(function(otherCheckbox) {
+        if (checkbox != otherCheckbox) {
+          otherCheckbox.disabled = true;
+        }
+      });
+    } else {
+      //Si se desmarca una casilla, habilitar todas las demás
+      checkboxes.forEach(function(otherCheckbox) {
+        otherCheckbox.disabled = false;
+      });
+    }
+  });
+});
+
+//Agregar un listener de envío al formulario
+document.querySelector('form').addEventListener('submit', function(e) {
+  var isChecked = false;
+  //Verificar si al menos una casilla está seleccionada
+  checkboxes.forEach(function(checkbox) {
+    if (checkbox.checked) {
+      isChecked = true;
+    }
+  });
+  //Si no se selecciona ninguna casilla, prevenir el envío del formulario y mostrar una alerta
+  if (!isChecked) {
+    e.preventDefault();
+    alert('Debes seleccionar al menos una sala de juntas');
+  }
+});
+</script>
+{% endblock %}

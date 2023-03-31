@@ -1,0 +1,38 @@
+{% extends "_Layout.html" %}
+{% block title %} Index {% endblock %}
+{% load static %}
+{% block contenido %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+  <div class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">¡Reserva tu sala de juntas ahora mismo!</h1>
+      <p class="hero-description">Ofrecemos salas de juntas equipadas con la última tecnología y un ambiente cómodo para que puedas llevar a cabo tus reuniones de manera efectiva.</p>
+      {% if user.is_authenticated %}
+      <a href="/createMeeting" class="btn btnIndex btn-primary">Reservar ahora</a>
+      {% else %}
+      <a href="/loginUser" class="btn btnIndex btn-primary">Reservar ahora</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feature">
+      <i class="fa fa-calendar-alt"></i>
+      <h3>Reserva fácil</h3>
+      <p>Nuestro sistema de reserva te permite reservar una sala de juntas en cuestión de segundos. Selecciona la fecha y hora de tu reunión y nosotros nos encargamos del resto.</p>
+    </div>
+
+    <div class="feature">
+      <i class="fa fa-wifi"></i>
+      <h3>Conexión a internet rápida</h3>
+      <p>Contamos con una conexión a internet de alta velocidad para que puedas hacer tus presentaciones sin interrupciones.</p>
+    </div>
+
+    <div class="feature">
+      <i class="fa fa-coffee"></i>
+      <h3>Café y té gratis</h3>
+      <p>Ofrecemos café y té gratis para que puedas relajarte y disfrutar de un ambiente agradable mientras esperas por tu reunión.</p>
+    </div>
+  </div>
+{% endblock %}
+

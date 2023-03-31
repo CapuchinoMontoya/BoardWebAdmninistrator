@@ -1,0 +1,64 @@
+{% extends "_Layout.html" %}
+{% block title %} Actualizar Reunion {% endblock %}
+{% load static %}
+{% block contenido %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}"/>
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+<div class="container">
+  <div class="card mx-auto">
+    <center><h3>Actualiza Reunion</h3></center>
+    <div class="card-body">
+      {% for i in rooms%}
+      <center>
+        <h5>Sala reservada: {{i.room.nameRoom}}</h5>
+        <h5>Reservada por: {{i.user}}</h5>
+        <h5>Inicio de reserva: {{i.startDate}}</h5>
+        <h5>Final de reserva: {{i.endDate}}</h5>
+      </center>
+      {% endfor %}
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="id_startDate">Fecha y hora de inicio de reservacion:</label>
+          <input type="datetime-local" class="form-control" id="id_startDate"
+            name="startDate" required>
+        </div>
+        <div class="form-group">
+          <label for="id_endDate">Fecha y hora final de reservacion:</label>
+          <input type="datetime-local" class="form-control" id="id_endDate"
+            name="endDate" required>
+        </div>
+        <hr>
+        <center><button type="submit" class="btn btn-success" onclick="updateMeeting()">Actualizar</button></center>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  //Selecciona el formulario en el documento
+  var form = document.querySelector('form');  
+  //Selecciona el campo de contraseña en el formulario
+  var startDateInput = document.querySelector('#startDate');  
+  var endDateInput = document.querySelector('#endDate'); 
+
+  form.addEventListener('submit', function(event) {
+    //Manda a llamar la funcion para validar la contraseña
+    if (!validarPassword(startDateInput, endDateInput)) { 
+      debugger;
+      event.preventDefault(); 
+    }else{
+      debugger;
+    }
+  });
+  //Funcion para valida campos vacios
+  function updateMeeting(startDateData, endDateData) {  
+    if (startDateData.value.trim() === '' || endDateData.value.trim() === ''){
+      return false
+    }else{
+      return true
+    }
+  }
+</script>
+{% endblock %}

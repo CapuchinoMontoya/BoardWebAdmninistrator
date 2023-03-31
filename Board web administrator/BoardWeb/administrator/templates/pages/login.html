@@ -1,0 +1,25 @@
+{% extends "_Layout.html" %}
+
+{% block title %} Login {% endblock %}
+{% load static %}
+{% block contenido %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/styleRegister.css' %}"/>
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+<div class="container">
+  <div class="card">
+    <h1>Login de usuario</h1>
+    <form method="post">
+      {% csrf_token %}
+      <label for="username">Nombre de usuario:</label>
+      <input type="text" name="username" id="username" required>
+
+      <label for="password1">Contraseña:</label>
+      <input type="password" name="password" id="password" required>
+
+      <input type="submit" value="Login">
+    </form>
+  </div>
+</div>
+{% endblock %}

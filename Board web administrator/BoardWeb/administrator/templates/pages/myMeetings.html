@@ -1,0 +1,44 @@
+{% extends "_Layout.html" %}
+{% block title %} Mis reservaciones {% endblock %}
+{% load static %}
+{% block contenido %}
+<center><h1>Mis Reuniones</h1></center>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-sm table-responsive-ls">
+                    <thead>
+                        <tr>
+                            <th scope="col">Reservado por:</th>
+                            <th scope="col">Fecha y hora de inicio</th>
+                            <th scope="col">Fecha y hora final</th>
+                            <th scope="col">Sala</th>
+                            <th scope="col">Actualizar</th>
+                            <th scope="col">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in rooms %}
+                        <tr class="table-active">
+                            <th scope="row">{{a.user}}</th>
+                            <td>{{a.startDate}}</td>
+                            <td>{{a.endDate}}</td>
+                            <td>{{a.room.nameRoom}}</td>
+                            <td><a href="{% url 'detailsMyMeeting' a.id %}" type="button" class="btn btn-warning">Actualizar</a></td>
+                            <td><a href="{% url 'deleteMyMeeting' a.id %}" type="button" class="btn btn-danger" onclick="DeleteMeeting()">Cancelar</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function DeleteMeeting(){
+        alert('Reunion Cancelada');
+    }
+</script>
+{% endblock %}

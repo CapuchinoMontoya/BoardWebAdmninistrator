@@ -1,0 +1,59 @@
+/* Estilos para el hero */
+.hero {
+  background-image: url('https://images.unsplash.com/photo-1532333191858-8f5392a009a9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8amFydW5pYXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
+  background-size: cover;
+  background-position: center center;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-content {
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+.hero-title {
+  font-size: 3em;
+  margin-bottom: 1em;
+}
+
+.hero-description {
+  font-size: 1.2em;
+  margin-bottom: 1.5em;
+}
+
+.btnIndex {
+  padding: 1em 2em;
+  font-size: 1.2em;
+  border-radius: 25px;
+}
+
+/* Estilos para las características */
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 2em 0;
+}
+
+.feature {
+  width: 300px;
+  margin: 1em;
+  text-align: center;
+}
+
+.feature i {
+  font-size: 3em;
+  margin-bottom: 1em;
+}
+
+.feature h3 {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+.feature p {
+  font-size: 1
+}
